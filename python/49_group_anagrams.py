@@ -17,7 +17,7 @@ class Solution:
             key = tuple(count)
             anagrams.setdefault(key, []).append(word)
 
-        return [words for words in anagrams.values()]
+        return anagrams.values()
 
 
 @lru_cache(maxsize=26)
