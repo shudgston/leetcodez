@@ -3,14 +3,22 @@ from typing import List
 
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        seen = {}  # value: index
+        return with_two_pointers(numbers, target)
 
-        for i in range(len(numbers)):
-            diff = target - numbers[i]
 
-            if diff in seen:
-                return [seen[diff] + 1, i + 1]
+def with_two_pointers(numbers: list, target: int):
+    left = 0
+    right = len(numbers) - 1
 
-            seen[numbers[i]] = i
+    while True:
+        res = numbers[left] + numbers[right]
 
-        return []
+        if res == target:
+            return [left + 1, right + 1]
+
+        if res > target:
+            right -= 1
+        else:
+            left += 1
+
+    return []
