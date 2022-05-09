@@ -10,7 +10,7 @@ def with_two_pointers(numbers: list, target: int):
     left = 0
     right = len(numbers) - 1
 
-    while True:
+    while left < right:
         res = numbers[left] + numbers[right]
 
         if res == target:
