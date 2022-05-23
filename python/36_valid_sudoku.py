@@ -10,7 +10,6 @@ class Solution:
 
         rows = [set() for _ in range(board_size)]
         cols = [set() for _ in range(board_size)]
-
         boxes = defaultdict(set)  # tuple: list
 
         for r in range(board_size):
@@ -19,22 +18,14 @@ class Solution:
                     continue
 
                 digit = int(board[r][c])
-
-                if digit in rows[r]:
-                    return False
-                else:
-                    rows[r].add(digit)
-
-                if digit in cols[c]:
-                    return False
-                else:
-                    cols[c].add(digit)
-
                 box = current_box(r, c)
-                if digit in boxes[box]:
+
+                if digit in rows[r] or digit in cols[c] or digit in boxes[box]:
                     return False
-                else:
-                    boxes[box].add(digit)
+
+                rows[r].add(digit)
+                cols[c].add(digit)
+                boxes[box].add(digit)
 
         return True
 
