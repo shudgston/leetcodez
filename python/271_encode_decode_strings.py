@@ -1,10 +1,10 @@
 # https://leetcode.com/problems/encode-and-decode-strings/
 
+from inspect import EndOfBlock
 from typing import List
 
 
 DELIM = "%"
-DELIM_LEN = len(DELIM)
 
 
 class Codec:
@@ -20,28 +20,22 @@ class Codec:
     def decode(self, s: str) -> List[str]:
         """Decodes a single string to a list of strings."""
         result = []
-        i = j = 0
+        i = 0
 
         while i < len(s):
-            if s[i].isdigit():
-                j = i + 1
+            j = i
 
-                while s[j] != DELIM:
-                    j += 1
+            while s[j] != DELIM:
+                j += 1
 
-                word_len = int(s[i:j])
-                num_len = j - i
-                result.append(
-                    s[i + num_len + DELIM_LEN : i + word_len + num_len + DELIM_LEN]
-                )
-                i = i + word_len + num_len + DELIM_LEN
-
-            else:
-                i += 1
+            word_len = int(s[i:j])
+            end_of_word = j + 1 + word_len
+            result.append(s[j + 1 : end_of_word])
+            i = end_of_word
 
         return result
 
 
 # Your Codec object will be instantiated and called as such:
 codec = Codec()
-print(codec.decode(codec.encode(["Hellooo7ooX", "World"])))
+print(codec.decode(codec.encode(["Hellooooo0o0o0o0o0o0o0o0ooX", "World"])))
