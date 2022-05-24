@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/encode-and-decode-strings/
 
-from inspect import EndOfBlock
 from typing import List
 
 
