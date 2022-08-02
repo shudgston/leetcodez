@@ -3,21 +3,33 @@ from collections import defaultdict
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        count = defaultdict(int)
-        left = 0
-        result = 0
+        seen = defaultdict(int)
+        l = 0
+        res = 0
+        most_freq = 0
 
-        for right in range(len(s)):
-            count[s[right]] += 1
+        # maximize the window len
+        # win_len - count_of_most_frequent <= k
 
-            if (right - left + 1) - max(count.values()) > k:
-                count[s[left]] -= 1
-                left += 1
+        for r in range(len(s)):
+            seen[s[r]] += 1
+            most_freq = max(most_freq, max(seen.values()))
+            # win_size = r - l + 1
 
-            result = max(result, right - left + 1)
+            # print("most_freq", most_freq)
+            # print("window_size", win_size)
 
-        return result
+            while (r - l + 1) - most_freq > k:
+                print("sliding left")
+                # move left
+                seen[s[l]] -= 1
+                l += 1
+
+            res = max(res, (r - l + 1))
+
+        return res
 
 
-print(Solution().characterReplacement("ABABBA", k=2))
+# print(Solution().characterReplacement("ABABBA", k=2))
 # print(Solution().characterReplacement("ABAB", k=2))
+print(Solution().characterReplacement("AABABBA", k=1))

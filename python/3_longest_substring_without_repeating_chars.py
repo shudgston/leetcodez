@@ -11,7 +11,9 @@ class Solution:
             # A duplicate was found. Remove s[left] from set of seen chars,
             # and advance the left pointer
             while s[right] in seen:
-                seen.remove(s[left])
+                if s[left] in seen:
+                    seen.remove(s[left])
+                    print("removing", s[left])
                 left += 1
 
             seen.add(s[right])
@@ -20,7 +22,13 @@ class Solution:
         return longest
 
 
-strings = ["abcabcbb", "bbbbbbbb", "pwwkew", " ", "au"]
+strings = [
+    "abcabcbb",
+    "bbbbbbbb",
+    "pwwkew",
+    " ",
+    "au",
+]
 
 for s in strings:
     print(f"input: '{s}'")
